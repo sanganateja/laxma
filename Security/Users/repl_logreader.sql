@@ -1,0 +1,2 @@
+CREATE USER [repl_logreader] WITHOUT LOGIN
+GO

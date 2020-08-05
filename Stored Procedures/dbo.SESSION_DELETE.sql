@@ -1,0 +1,13 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[SESSION_DELETE]  
+   @p_session_id numeric
+AS 
+   
+   BEGIN
+      DELETE dbo.ACC_SESSIONS
+      WHERE ACC_SESSIONS.SESSION_ID = @p_session_id
+   END
+GO

@@ -1,0 +1,28 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[BULK_PAYMENT_BATCH_FIND]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_batch_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT b.BATCH_ID,
+           b.OWNER_ID,
+           b.DESCRIPTION,
+           b.PAYMENT_COUNT,
+           b.IMPORT_DATE,
+           b.SUBMIT_DATE,
+           b.STATUS,
+           b.BULK_PAYMENT_SOURCE_ID,
+           b.ACCOUNT_GROUP_ID
+    FROM dbo.ACC_BULK_PAYMENT_BATCHES AS b
+    WHERE b.BATCH_ID = @p_batch_id;
+
+    RETURN;
+
+END;
+GO

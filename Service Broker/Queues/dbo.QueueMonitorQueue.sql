@@ -1,0 +1,12 @@
+CREATE QUEUE [dbo].[QueueMonitorQueue] 
+WITH STATUS=ON, 
+RETENTION=OFF,
+POISON_MESSAGE_HANDLING (STATUS=ON), 
+ACTIVATION (
+STATUS=ON, 
+PROCEDURE_NAME=[dbo].[spMessageProcessorQueueMonitorQueue], 
+MAX_QUEUE_READERS=2, 
+EXECUTE AS N'ServiceBrokerUser'
+)
+ON [PRIMARY]
+GO

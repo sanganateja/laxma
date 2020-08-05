@@ -1,0 +1,29 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[COMM_PLAN_UPDATE_PARAMS]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_plan_id NUMERIC,
+    @p_name NVARCHAR(2000),
+    @p_default_value NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    UPDATE dbo.ACC_COMMISSION_PLANS
+    SET PLAN_NAME = @p_name,
+        IS_DEFAULT = @p_default_value
+    WHERE ACC_COMMISSION_PLANS.PLAN_ID = @p_plan_id;
+
+    /* Return current state of commission plan.*/
+    SELECT ACC_COMMISSION_PLANS.PLAN_ID,
+           ACC_COMMISSION_PLANS.PLAN_NAME,
+           ACC_COMMISSION_PLANS.IS_DEFAULT,
+           ACC_COMMISSION_PLANS.CRM_ID
+    FROM dbo.ACC_COMMISSION_PLANS
+    WHERE ACC_COMMISSION_PLANS.PLAN_ID = @p_plan_id;
+
+END;
+GO

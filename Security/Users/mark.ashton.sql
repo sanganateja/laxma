@@ -1,0 +1,2 @@
+CREATE USER [mark.ashton] WITHOUT LOGIN
+GO

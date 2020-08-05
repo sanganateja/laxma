@@ -1,0 +1,2 @@
+CREATE USER [AccountsSBUser] WITHOUT LOGIN
+GO

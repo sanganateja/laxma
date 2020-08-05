@@ -1,0 +1,2 @@
+CREATE USER [cf_acc_app] WITHOUT LOGIN
+GO

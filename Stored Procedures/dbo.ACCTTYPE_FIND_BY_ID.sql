@@ -1,0 +1,22 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[ACCTTYPE_FIND_BY_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_account_type_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT aat.ACCOUNT_TYPE_ID,
+           aat.NAME,
+           aat.ROUNDING
+    FROM dbo.ACC_ACCOUNT_TYPES AS aat
+    WHERE aat.ACCOUNT_TYPE_ID = @p_account_type_id;
+
+    RETURN;
+
+END;
+GO

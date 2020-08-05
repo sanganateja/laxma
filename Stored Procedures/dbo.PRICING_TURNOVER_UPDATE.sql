@@ -1,0 +1,15 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[PRICING_TURNOVER_UPDATE]
+    @p_description NVARCHAR(2000),
+    @p_pricing_turnover_band_id NUMERIC /* ID*/
+AS
+BEGIN
+    UPDATE dbo.ACC_PRICING_TURNOVER_BANDS
+    SET DESCRIPTION = @p_description
+    FROM dbo.ACC_PRICING_TURNOVER_BANDS AS ptb
+    WHERE ptb.PRICING_TURNOVER_BAND_ID = @p_pricing_turnover_band_id;
+END;
+GO

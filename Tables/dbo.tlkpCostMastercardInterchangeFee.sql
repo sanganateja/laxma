@@ -1,0 +1,43 @@
+CREATE TABLE [dbo].[tlkpCostMastercardInterchangeFee]
+(
+[FeeId] [bigint] NOT NULL IDENTITY(1, 1),
+[EffectiveFrom] [datetime2] NULL,
+[EffectiveUntil] [datetime2] NULL,
+[MerchantCountryRegion] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[IssuerCountryRegion] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[Ird] [nchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[IrdDescription] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[MinimumAmountMajorUnit] [decimal] (18, 2) NULL,
+[MaximumAmountMajorUnit] [decimal] (18, 2) NULL,
+[AmountCurrency] [nchar] (3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[FeePercentAsMultiplier] [decimal] (18, 8) NULL,
+[FixedFeeMajorUnit] [decimal] (18, 8) NULL,
+[CappedMajorUnit] [decimal] (18, 8) NULL,
+[FixedCurrency] [nchar] (3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[PosTerminalInputCapability] [nchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[CardDataInputMode] [nchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[CardholderPresentData] [tinyint] NULL,
+[CardPresentData] [tinyint] NULL,
+[CardholderAuthCapability] [tinyint] NULL,
+[CardholderAuthMethod] [tinyint] NULL,
+[Icc] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[TimelinessDays] [bigint] NULL,
+[ServiceCode] [nchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[AccFundingSource] [nchar] (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[ProductType] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[CardProgIdentifier] [nchar] (3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[GcmsProductIdentifier] [nchar] (3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[Mti] [nchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[FunctionCode] [nchar] (3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[ProcessingCode] [nchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[CabProgramInclude] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[CabProgramExcludes] [nvarchar] (1000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[MccInclude] [nchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[MccExcludes] [nvarchar] (1000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[ApprovalCode] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[CorporateCardCommonData] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[CorporateLineItemDetail] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[tlkpCostMastercardInterchangeFee] ADD CONSTRAINT [PK_tlkpCostMastercardInterchangeFee] PRIMARY KEY CLUSTERED  ([FeeId]) ON [PRIMARY]
+GO

@@ -1,0 +1,20 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[spBankStandingOrderDisableAllForOwner]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @OwnerId NUMERIC
+AS
+BEGIN
+    SET @cv_1 = NULL;
+
+    UPDATE so
+    SET so.STATUS = 'D'
+    FROM ACC_BANK_STANDING_ORDERS so JOIN ACC_ACCOUNT_GROUPS ag ON so.ACCOUNT_GROUP_ID = ag.ACCOUNT_GROUP_ID
+                                     JOIN ACC_OWNERS o ON ag.OWNER_ID = o.OWNER_ID
+    WHERE o.OWNER_ID = @OwnerId;
+
+    SELECT 0 AS COUNT;  -- Not used
+END;
+GO

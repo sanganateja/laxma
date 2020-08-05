@@ -1,0 +1,20 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[DSGN_LK_FIND_BY_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_lookup_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT dl.*
+    FROM CST_DESIGNATOR_LOOKUP dl
+    WHERE dl.LOOKUP_ID = @p_lookup_id;
+
+    RETURN;
+
+END;
+GO

@@ -1,0 +1,18 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[CONCURRENT_REPORT_CREATE]
+    @p_time_added DATETIME2(6),
+    @p_report_name NVARCHAR(2000)
+AS
+BEGIN
+    INSERT dbo.ACC_CONCURRENT_REPORTS
+    (
+        REPORT_NAME,
+        TIME_ADDED
+    )
+    VALUES
+    (@p_report_name, CAST(@p_time_added AS DATE));
+END;
+GO

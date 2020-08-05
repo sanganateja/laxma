@@ -1,0 +1,36 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[TRANSFER_FIND_UNMATURED_FOR_DATE]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @AccountId BIGINT,
+    @BatchDate DATETIME2
+AS
+BEGIN
+    DECLARE @NextDate DATETIME2;
+
+    SET @cv_1 = NULL;
+    SET @NextDate = DATEADD(day, 1, @BatchDate);
+
+    SELECT t.TRANSFER_ID,
+           t.TRANSFER_TIME,
+           t.ACCOUNT_ID,
+           t.TRANSFER_TYPE_ID,
+           t.AMOUNT_MINOR_UNITS,
+           t.BALANCE_AFTER_MINOR_UNITS,
+           t.BATCH_ID,
+           t.TRANSACTION_ID,
+           t.TRANSFER_METHOD_ID,
+           t.MATURITY_TIME,
+           t.MATURITY_TRANSACTION_ID
+    FROM dbo.ACC_TRANSFERS AS t
+    WHERE t.ACCOUNT_ID = @AccountId
+      AND t.MATURITY_TRANSACTION_ID IS NULL
+      AND t.MATURITY_TIME IS NOT NULL
+      AND t.MATURITY_TIME >= @BatchDate
+      AND t.MATURITY_TIME < @NextDate
+    ORDER BY t.TRANSFER_ID;
+
+END;
+GO

@@ -1,0 +1,26 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[MONTHLY_ALLOWANCE_FIND_BY_ID]
+
+
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_monthly_allowance_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT ma.MONTHLY_ALLOWANCE_ID,
+           ma.TRANSFER_METHOD_ID,
+           ma.FREE_ALLOWANCE,
+           ma.ACCOUNT_GROUP_ID,
+           ma.REMAINING_UNITS
+    FROM dbo.ACC_MONTHLY_ALLOWANCES AS ma
+    WHERE ma.MONTHLY_ALLOWANCE_ID = @p_monthly_allowance_id;
+
+    RETURN;
+
+END;
+GO

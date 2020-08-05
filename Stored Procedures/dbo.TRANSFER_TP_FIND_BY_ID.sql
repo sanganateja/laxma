@@ -1,0 +1,22 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[TRANSFER_TP_FIND_BY_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_transfer_type_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT tt.TRANSFER_TYPE_ID,
+           tt.NAME,
+           tt.DESCRIPTION
+    FROM dbo.ACC_TRANSFER_TYPES AS tt
+    WHERE tt.TRANSFER_TYPE_ID = @p_transfer_type_id;
+
+    RETURN;
+
+END;
+GO

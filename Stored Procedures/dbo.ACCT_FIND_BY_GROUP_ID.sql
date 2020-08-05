@@ -1,0 +1,24 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[ACCT_FIND_BY_GROUP_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_account_group_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT aa.ACCOUNT_ID,
+           aa.ACCOUNT_GROUP_ID,
+           aa.ACCOUNT_TYPE_ID,
+           aa.BALANCE_MINOR_UNITS,
+           aa.MATURITY_HOURS
+    FROM dbo.ACC_ACCOUNTS AS aa
+    WHERE aa.ACCOUNT_GROUP_ID = @p_account_group_id;
+
+    RETURN;
+
+END;
+GO

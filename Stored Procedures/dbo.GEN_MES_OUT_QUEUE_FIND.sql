@@ -1,0 +1,24 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[GEN_MES_OUT_QUEUE_FIND]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_message_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT gm.MESSAGE_ID,
+           gm.MESSAGE_TIMESTAMP,
+           gm.MESSAGE_TYPE,
+           gm.MESSAGE_REFERENCE,
+           gm.MESSAGE_TEXT
+    FROM dbo.ACC_GENERIC_MESSAGES_OUT_QUEUE AS gm
+    WHERE gm.MESSAGE_ID = @p_message_id;
+
+    RETURN;
+
+END;
+GO

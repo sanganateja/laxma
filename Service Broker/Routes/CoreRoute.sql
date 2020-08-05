@@ -1,0 +1,5 @@
+CREATE ROUTE [CoreRoute]
+AUTHORIZATION [dbo] 
+WITH ADDRESS=N'LOCAL',
+SERVICE_NAME=N'CoreOutboundService'
+GO

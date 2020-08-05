@@ -1,0 +1,27 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[ACQ_FEE_IC_FROM_TEMPLATES]
+
+
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_pricing_turnover_band_id NUMERIC,
+    @p_account_group_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT ACC_PRICING_TEMPLATES_IC.TEMPLATE_IC_ID AS acq_fee_ic_id,
+           @p_account_group_id AS account_group_id,
+           ACC_PRICING_TEMPLATES_IC.PERCENTAGE,
+           ACC_PRICING_TEMPLATES_IC.AMOUNT_MINOR_UNITS,
+           ACC_PRICING_TEMPLATES_IC.FEE_DISTINGUISHER
+    FROM dbo.ACC_PRICING_TEMPLATES_IC
+    WHERE ACC_PRICING_TEMPLATES_IC.PRICING_TURNOVER_BAND_ID = @p_pricing_turnover_band_id;
+
+    RETURN;
+
+END;
+GO

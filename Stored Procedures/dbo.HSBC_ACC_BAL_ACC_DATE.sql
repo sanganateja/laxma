@@ -1,0 +1,26 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[HSBC_ACC_BAL_ACC_DATE]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_account_id NUMERIC,
+    @p_balance_date DATETIME2(6)
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT ab.BALANCE_ID,
+           ab.ACCOUNT_ID,
+           ab.BALANCE_DATE,
+           ab.OPENING_BALANCE_MINOR_UNITS,
+           ab.CLOSING_BALANCE_MINOR_UNITS
+    FROM dbo.ACC_HSBC_ACCOUNT_BALANCES AS ab
+    WHERE ab.ACCOUNT_ID = @p_account_id
+          AND CAST(ab.BALANCE_DATE AS DATE) = CAST(@p_balance_date AS DATE);
+
+    RETURN;
+
+END;
+GO

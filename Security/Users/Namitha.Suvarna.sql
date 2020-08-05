@@ -1,0 +1,2 @@
+CREATE USER [Namitha.Suvarna] WITHOUT LOGIN
+GO

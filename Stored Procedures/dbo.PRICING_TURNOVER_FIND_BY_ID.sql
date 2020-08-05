@@ -1,0 +1,21 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[PRICING_TURNOVER_FIND_BY_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_pricing_turnover_band_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT ptb.DESCRIPTION,
+           ptb.PRICING_TURNOVER_BAND_ID
+    FROM dbo.ACC_PRICING_TURNOVER_BANDS AS ptb
+    WHERE ptb.PRICING_TURNOVER_BAND_ID = @p_pricing_turnover_band_id;
+
+    RETURN;
+
+END;
+GO

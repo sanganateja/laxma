@@ -1,0 +1,31 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[DESIGNATOR_LOOKUP_BY_RT]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_fee_program NVARCHAR(2000),
+    @p_rate_tier NVARCHAR(2000)
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT DISTINCT
+           CST_DESIGNATOR_ACQ_LOOKUP.INTERCHANGE_DESCRIPTION AS NAME
+    FROM dbo.CST_DESIGNATOR_ACQ_LOOKUP
+    WHERE (
+              CST_DESIGNATOR_ACQ_LOOKUP.FEE_PROGRAM = @p_fee_program
+              OR @p_fee_program IS NULL
+          )
+          AND
+          (
+              CST_DESIGNATOR_ACQ_LOOKUP.RATE_TIER = @p_rate_tier
+              OR @p_rate_tier IS NULL
+          )
+    ORDER BY CST_DESIGNATOR_ACQ_LOOKUP.INTERCHANGE_DESCRIPTION;
+
+    RETURN;
+
+END;
+GO

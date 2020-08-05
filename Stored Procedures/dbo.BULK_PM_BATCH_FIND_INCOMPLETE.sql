@@ -1,0 +1,23 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[BULK_PM_BATCH_FIND_INCOMPLETE]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_statuses NVARCHAR(2000),
+    @p_owner_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT b.*
+    FROM ACC_BULK_PAYMENT_BATCHES b
+    WHERE CHARINDEX(b.STATUS, @p_statuses) > 0
+          AND b.OWNER_ID = @p_owner_id
+    ORDER BY 1;
+
+    RETURN;
+
+END;
+GO

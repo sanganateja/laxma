@@ -1,0 +1,5 @@
+CREATE ROUTE [QueueMonitorRoute]
+AUTHORIZATION [dbo] 
+WITH ADDRESS=N'LOCAL',
+SERVICE_NAME=N'QueueMonitorService'
+GO

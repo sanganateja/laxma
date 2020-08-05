@@ -1,0 +1,6 @@
+CREATE CONTRACT [InterDBContract]
+AUTHORIZATION [dbo] ( 
+[ForOtherDBMessage] SENT BY INITIATOR,
+[FromOtherDBMessage] SENT BY TARGET
+)
+GO

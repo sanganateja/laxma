@@ -1,0 +1,2 @@
+CREATE USER [dale.tanner] WITHOUT LOGIN
+GO

@@ -1,0 +1,28 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[ACCT_UPD_MATURITYHOURS]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_account_id NUMERIC,
+    @p_new_maturity_hours NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    UPDATE dbo.ACC_ACCOUNTS
+    SET MATURITY_HOURS = @p_new_maturity_hours
+    WHERE ACC_ACCOUNTS.ACCOUNT_ID = @p_account_id;
+
+    /* Return current state of owner.*/
+    SELECT ACC_ACCOUNTS.ACCOUNT_ID,
+           ACC_ACCOUNTS.ACCOUNT_GROUP_ID,
+           ACC_ACCOUNTS.ACCOUNT_TYPE_ID,
+           ACC_ACCOUNTS.BALANCE_MINOR_UNITS,
+           ACC_ACCOUNTS.MATURITY_HOURS
+    FROM dbo.ACC_ACCOUNTS
+    WHERE ACC_ACCOUNTS.ACCOUNT_ID = @p_account_id;
+
+END;
+GO

@@ -1,0 +1,38 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[EVTPOST_BEGIN]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_registry_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    DECLARE @v_lock_count NUMERIC;
+
+    /* Lock the accounts*/
+
+    EXEC dbo.[EVTPOST_LOCKACCOUNTS$IMPL] @p_registry_id = @p_registry_id,
+                                         @return_value_argument = @v_lock_count OUTPUT;
+
+    /* Return the info we have registered...*/
+    SELECT ACC_EVTPOST_REGISTRY.ID,
+           ACC_EVTPOST_REGISTRY.ACCOUNT_GROUP_ID,
+           ACC_EVTPOST_REGISTRY.EVENT_TYPE_ID,
+           ACC_EVTPOST_REGISTRY.TRANSFER_TYPE_ID,
+           ACC_EVTPOST_REGISTRY.FROM_ACCOUNT_ID,
+           ACC_EVTPOST_REGISTRY.FROM_BALANCE,
+           ACC_EVTPOST_REGISTRY.FROM_ARREARS_TYPE_ID,
+           ACC_EVTPOST_REGISTRY.FROM_MATURITY_HOURS,
+           ACC_EVTPOST_REGISTRY.FROM_MINIMUM_BALANCE,
+           ACC_EVTPOST_REGISTRY.TO_ACCOUNT_ID,
+           ACC_EVTPOST_REGISTRY.TO_BALANCE,
+           ACC_EVTPOST_REGISTRY.TO_ARREARS_TYPE_ID,
+           ACC_EVTPOST_REGISTRY.TO_MATURITY_HOURS
+    FROM dbo.ACC_EVTPOST_REGISTRY
+    WHERE ACC_EVTPOST_REGISTRY.ID = @p_registry_id;
+
+END;
+GO

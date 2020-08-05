@@ -1,0 +1,2 @@
+CREATE USER [repl_snapshot] WITHOUT LOGIN
+GO

@@ -1,0 +1,2 @@
+CREATE USER [DataServiceUser] WITHOUT LOGIN
+GO

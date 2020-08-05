@@ -1,0 +1,24 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[MONTHLY_FEE_FIND_BY_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_monthly_fee_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT mf.MONTHLY_FEE_ID,
+           mf.OWNER_ID,
+           mf.CURRENCY_CODE_ALPHA3,
+           mf.AMOUNT_MINOR_UNITS,
+           mf.FEE_TYPE_ID
+    FROM dbo.ACC_MONTHLY_FEES AS mf
+    WHERE mf.MONTHLY_FEE_ID = @p_monthly_fee_id;
+
+    RETURN;
+
+END;
+GO

@@ -1,0 +1,26 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[PRICING_TIER_XFER_FIND_BY_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_tier_transfer_fee_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT pttf.TIER_TRANSFER_FEE_ID,
+           pttf.PRICING_TIER_ID,
+           pttf.TRANSFER_METHOD_ID,
+           pttf.CURRENCY_CODE_ALPHA3,
+           pttf.AMOUNT_MINOR_UNITS_OUT,
+           pttf.AMOUNT_MINOR_UNITS_IN,
+           pttf.AMOUNT_MINOR_UNITS_OUT_ADD
+    FROM dbo.ACC_PRICING_TIER_TRANSFER_FEES AS pttf
+    WHERE pttf.TIER_TRANSFER_FEE_ID = @p_tier_transfer_fee_id;
+
+    RETURN;
+
+END;
+GO

@@ -1,0 +1,2 @@
+CREATE USER [QATestAutomation] WITHOUT LOGIN
+GO

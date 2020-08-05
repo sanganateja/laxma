@@ -1,0 +1,31 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[TRANSFER_FIND_BY_ACCOUNT_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_id NUMERIC /* ID*/
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT t.TRANSFER_ID,
+           t.TRANSFER_TIME,
+           t.ACCOUNT_ID,
+           t.TRANSFER_TYPE_ID,
+           t.AMOUNT_MINOR_UNITS,
+           t.BALANCE_AFTER_MINOR_UNITS,
+           t.BATCH_ID,
+           t.TRANSACTION_ID,
+           t.TRANSFER_METHOD_ID,
+           t.MATURITY_TIME,
+           t.MATURITY_TRANSACTION_ID
+    FROM dbo.ACC_TRANSFERS AS t
+    WHERE t.ACCOUNT_ID = @p_id
+    ORDER BY t.TRANSFER_ID;
+
+    RETURN;
+
+END;
+GO

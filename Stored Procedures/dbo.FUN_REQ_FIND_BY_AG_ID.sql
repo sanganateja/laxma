@@ -1,0 +1,31 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[FUN_REQ_FIND_BY_AG_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_ag_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT fr.FUNDS_REQUEST_ID,
+           fr.REQUEST_TIME,
+           fr.PAYER_NAME,
+           fr.PAYER_EMAIL,
+           fr.AMOUNT_MINOR_UNITS,
+           fr.REQUEST_REASON,
+           fr.REQUEST_REFERENCE,
+           fr.TRANSACTION_ID,
+           fr.PAID_STATUS,
+           fr.ACCOUNT_GROUP_ID,
+           fr.TARGET_ACCOUNT_GROUP_ID
+    FROM dbo.ACC_FUNDS_REQUESTS AS fr
+    WHERE fr.ACCOUNT_GROUP_ID = @p_ag_id
+    ORDER BY fr.REQUEST_TIME;
+
+    RETURN;
+
+END;
+GO

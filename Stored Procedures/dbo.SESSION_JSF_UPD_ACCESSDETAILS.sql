@@ -1,0 +1,27 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[SESSION_JSF_UPD_ACCESSDETAILS]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_access_count NUMERIC,
+    @p_session_uuid NVARCHAR(36)
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    UPDATE dbo.ACC_SESSIONS_JSF
+    SET ACCESS_COUNT = @p_access_count
+    WHERE ACC_SESSIONS_JSF.SESSION_UUID = @p_session_uuid;
+
+    /* Return current state of session jsf.*/
+    SELECT ACC_SESSIONS_JSF.SESSION_UUID,
+           ACC_SESSIONS_JSF.SESSION_STATE,
+           ACC_SESSIONS_JSF.EXPIRY_TIME,
+           ACC_SESSIONS_JSF.ACCESS_COUNT
+    FROM dbo.ACC_SESSIONS_JSF
+    WHERE ACC_SESSIONS_JSF.SESSION_UUID = @p_session_uuid;
+
+END;
+GO

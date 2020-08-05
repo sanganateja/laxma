@@ -1,0 +1,23 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[DESIGNATOR_FIND_BY_TYPE]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_type_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT cd.DESIGNATOR_ID,
+           cd.DESCRIPTION,
+           cd.CATEGORY_ID,
+           cd.TYPE_ID
+    FROM dbo.CST_DESIGNATORS AS cd
+    WHERE cd.TYPE_ID = @p_type_id;
+
+    RETURN;
+
+END;
+GO

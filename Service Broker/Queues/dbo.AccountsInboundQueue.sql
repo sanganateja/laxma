@@ -1,0 +1,12 @@
+CREATE QUEUE [dbo].[AccountsInboundQueue] 
+WITH STATUS=ON, 
+RETENTION=OFF,
+POISON_MESSAGE_HANDLING (STATUS=ON), 
+ACTIVATION (
+STATUS=ON, 
+PROCEDURE_NAME=[dbo].[spMessageProcessorAccountsInboundQueue], 
+MAX_QUEUE_READERS=5, 
+EXECUTE AS N'ServiceBrokerUser'
+)
+ON [PRIMARY]
+GO

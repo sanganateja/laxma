@@ -1,0 +1,13 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[ACQ_FEE_IC_CLEAN_BY_AG]  
+   @p_account_group_id numeric
+AS 
+   
+   BEGIN
+      DELETE dbo.ACC_ACQUIRING_FEES_IC
+      WHERE ACC_ACQUIRING_FEES_IC.ACCOUNT_GROUP_ID = @p_account_group_id
+   END
+GO

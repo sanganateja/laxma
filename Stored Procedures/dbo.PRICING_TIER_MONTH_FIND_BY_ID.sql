@@ -1,0 +1,23 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[PRICING_TIER_MONTH_FIND_BY_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_tier_monthly_fee_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT ptmf.TIER_MONTHLY_FEE_ID,
+           ptmf.PRICING_TIER_ID,
+           ptmf.CURRENCY_CODE_ALPHA3,
+           ptmf.AMOUNT_MINOR_UNITS
+    FROM dbo.ACC_PRICING_TIER_MONTHLY_FEES AS ptmf
+    WHERE ptmf.TIER_MONTHLY_FEE_ID = @p_tier_monthly_fee_id;
+
+    RETURN;
+
+END;
+GO

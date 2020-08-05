@@ -1,0 +1,22 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   PROCEDURE [dbo].[TRANSFER_MT_FIND_BY_ID]
+    @cv_1 VARCHAR(2000) OUTPUT,
+    @p_transfer_method_id NUMERIC
+AS
+BEGIN
+
+    SET @cv_1 = NULL;
+
+    SELECT tm.TRANSFER_METHOD_ID,
+           tm.DESCRIPTION,
+           tm.PAYMENT_TYPE_MNEMONIC
+    FROM dbo.ACC_TRANSFER_METHODS AS tm
+    WHERE tm.TRANSFER_METHOD_ID = @p_transfer_method_id;
+
+    RETURN;
+
+END;
+GO
